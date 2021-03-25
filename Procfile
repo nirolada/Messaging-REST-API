@@ -1,4 +1,4 @@
-worker: gunicorn gettingstarted.wsgi
-worker: export FLASK_APP=app
-worker: flask init-db
-worker: gunicorn 'app:create_app()'
+web: gunicorn gettingstarted.wsgi
+web: export FLASK_APP=app
+web: flask init-db
+web: gunicorn 'app:create_app()'
