@@ -1,15 +1,17 @@
 import os
+from uuid import uuid4
 
 from flask import Flask
 
-from . import db, auth
+from . import db, auth, messages
 
 
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    flask_env = os.getenv('FLASK_ENV', 'development').lower()
     app.config.from_mapping(
-        SECRET_KEY='dev',  # should be overriden with random value when deploying
+        SECRET_KEY=uuid4() if flask_env == 'production' else flask_env,
         DATABASE=os.path.join(app.instance_path, 'app.sqlite')
     )
 
@@ -26,12 +28,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
-    
-    db.init_app(app)
+    @app.route('/isalive')
+    def isalive():
+        return 'Messaging REST API is up!'
+
+    db.init_app(app)  # register db with the application
     app.register_blueprint(auth.bp)
+    app.register_blueprint(messages.bp)
 
     return app
