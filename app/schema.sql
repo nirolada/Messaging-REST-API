@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS message;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -7,11 +7,14 @@ CREATE TABLE user (
     password TEXT NOT NULL
 );
 
-CREATE TABLE post (
+CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    author_id INTEGER NOT NULL,
+    sender_id INTEGER NOT NULL,
+    receiver_id INTEGER NOT NULL, 
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    title TEXT NOT NULL,
-    body TEXT NOT NULL,
-    FOREIGN KEY (author_id) REFERENCES user (id)
+    subject TEXT NOT NULL,
+    message TEXT NOT NULL,
+    unread BOOLEAN NOT NULL DEFAULT 1,
+    FOREIGN KEY (sender_id) REFERENCES user (id),
+    FOREIGN KEY (receiver_id) REFERENCES user (id)
 );
