@@ -1,6 +1,4 @@
 import os
-from uuid import uuid4
-
 from flask import Flask
 
 from . import db, auth, messages
@@ -11,7 +9,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     flask_env = os.getenv('FLASK_ENV', 'development').lower()
     app.config.from_mapping(
-        SECRET_KEY=uuid4() if flask_env == 'production' else flask_env,
+        SECRET_KEY=os.urandom(16) if flask_env == 'production' else flask_env,
         DATABASE=os.path.join(app.instance_path, 'app.sqlite')
     )
 
