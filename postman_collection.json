@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "e3ccf673-7a5e-4a24-b865-e54f55487778",
+		"name": "Messaging REST API",
+		"description": "A simple Messaging REST API. Allows to:<br>\nRegister, Login, Logout, Send a message,<br>\nGet messages, Get unread messages, <br>\nRead a message and Delete a message<br>\n<br>\nThe service is deployed on AWS EC2 machine @ http://18.191.193.129:8080/<br>\nRead the documentation to learn the usage.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "isAlive",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.191.193.129:8080/isalive",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"isalive"
+					]
+				},
+				"description": "Get a message saying that the service is up."
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Username",
+							"value": "luckylook",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "ll123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://18.191.193.129:8080/auth/register",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"register"
+					]
+				},
+				"description": "Register a user.<br>\nRequired form keys:<br>\nUsername<br>\nPassword"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Username",
+							"value": "luckylook",
+							"type": "text"
+						},
+						{
+							"key": "Password",
+							"value": "ll123456",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://18.191.193.129:8080/auth/login",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "Login as a registered user.<br>\nRequired form keys:<br>\nUsername<br>\nPassword"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.191.193.129:8080/auth/logout",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"logout"
+					]
+				},
+				"description": "Log out the connected user."
+			},
+			"response": []
+		},
+		{
+			"name": "Send message",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "To",
+							"value": "luckylook",
+							"type": "text"
+						},
+						{
+							"key": "Subject",
+							"value": "Message 3",
+							"type": "text"
+						},
+						{
+							"key": "Message",
+							"value": "Message 3 Body",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://18.191.193.129:8080/messages",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"messages"
+					]
+				},
+				"description": "Send a message to another user.<br>\nRequired form keys:<br>\nTo - The receiver username<br>\nSubject<br>\nMessage - The message body"
+			},
+			"response": []
+		},
+		{
+			"name": "Get messages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.191.193.129:8080/messages",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"messages"
+					]
+				},
+				"description": "Get all messages for the connected user."
+			},
+			"response": []
+		},
+		{
+			"name": "Read message",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.191.193.129:8080/messages/2",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"messages",
+						"2"
+					]
+				},
+				"description": "Read a received message given a message id."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete message",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://18.191.193.129:8080/messages/1",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"messages",
+						"1"
+					]
+				},
+				"description": "Delete a message received or sent by the connected user given a message id."
+			},
+			"response": []
+		},
+		{
+			"name": "Get unread messages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://18.191.193.129:8080/messages/unread",
+					"protocol": "http",
+					"host": [
+						"18",
+						"191",
+						"193",
+						"129"
+					],
+					"port": "8080",
+					"path": [
+						"messages",
+						"unread"
+					]
+				},
+				"description": "Get all unread messages for the connected user."
+			},
+			"response": []
+		}
+	]
+}
